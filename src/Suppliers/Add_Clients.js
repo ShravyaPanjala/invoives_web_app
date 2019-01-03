@@ -22,6 +22,7 @@ class Add_Clients extends React.Component {
         this.setState({ GST_Number: event.target.value })
     }
     Add_Clients_Func(obj,any){
+        console.log(obj)
         fetch('http://localhost:4000/Add_Clients',{
             method:'POST',
             headers: {
