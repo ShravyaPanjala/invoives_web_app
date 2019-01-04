@@ -1,44 +1,41 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-import Add_Clients from './Add_Clients';
+import Add_Products from './Add_Products';
 import './table.css';
-class SupplyClients extends React.Component {
+class SupplyProducts extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             Data: []
         };
-        this.ClientList();
+        this.ProductList();
     }
 
     componentDidMount() {
-        this.ClientList();
+        this.ProductList();
     }
 
-    ClientList() {
-        fetch('http://localhost:4000/List_All_Clients').then((result) => {
+    ProductList() {
+        fetch('http://localhost:4000/List_All_Products').then((result) => {
             return result.json();
         }).then((Response) => {
             this.setState({ Data: Response })
         })
     }
     render() {
-        var all_clients = this.state.Data.map((item, i) => (
+        var all_products = this.state.Data.map((item, i) => (
             <tr>
                 <td>
                     {i + 1}
                 </td>
                 <td>
-                    {item.Name}
+                    {item.ProductID}
                 </td>
                 <td>
-                    {item.PhoneNumber}
+                    {item.Product_Name}
                 </td>
                 <td>
-                    {item.EmailID}
-                </td>
-                <td>
-                    {item.GST_Number}
+                    {item.Product_Price}
                 </td>
             </tr>
         ));
@@ -52,30 +49,27 @@ class SupplyClients extends React.Component {
                                     S.No
                             </th>
                                 <th>
-                                    Name
+                                    Product ID
                             </th>
                                 <th>
-                                    Phone Number
+                                    Product Name
                             </th>
                                 <th>
-                                    Email ID
-                            </th>
-                                <th>
-                                    GST Number
+                                   Product Price
                             </th>
                             </tr>
                         </thead>
                         <tbody>
-                            {all_clients}
+                            {all_products}
                         </tbody>
                     </table>
                     <button classname="button">
-                        <Link to="/supply/add_clients">
-                            ADD Clients
+                        <Link to="/supply/add_products">
+                            ADD Products
                         </Link>
                     </button>
                     <Switch>
-                        <Route exact path="/supply/add_clients" component={Add_Clients} />
+                        <Route exact path="/supply/add_products" component={Add_Products} />
                     </Switch>
                 </div>
 
@@ -84,4 +78,4 @@ class SupplyClients extends React.Component {
 
     }
 }
-export default SupplyClients
+export default SupplyProducts
